@@ -30,7 +30,7 @@
 
 </form>
 <?php elseif( $page_flag === 2 ): ?>
-<p>送信が完了しました。</p>
+<p>送信成功</p>
 <?php else: ?>
   <?php if( !empty($error) ): ?>
 	<ul class="error_list">
