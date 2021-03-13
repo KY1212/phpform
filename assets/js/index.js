@@ -1,5 +1,11 @@
-$(function(){
-  $('.submit').click(function () {
+$(function () {
+
+  function validation() {
+
+}
+
+  function ajax() {
+      $('.submit').click(function () {
     if (!confirm('テスト送信してもよろしいですか？')) {
       return false;
     } else {
@@ -13,18 +19,17 @@ $(function(){
         $.ajax ({
           url: 'sendmail.php',//送信先のURL
           type: 'POST',//POST送信
-          data: form_data,//送信するデータを指定
+          data: {
+            name: $('.name').val(),
+            email: $('.email').val(),
+            message: $('.comment').val()
+          },
           timeout: 60000,  //タイムアウトの設定
           beforeSend: function (xhr, settings) {
             //リクエスト送信前にボタンを非活性化する
             $('.submit').attr('disabled', true);
-            // //モーダルウィンドウの表示
-            $('.status-wrap').css({
-              display: "block"
-            });
-            $('.status-wrap').animate({
-              top: "0px"
-            },duration);
+
+
 
           },
           complete: function(xhr, textStatus) {
@@ -39,14 +44,26 @@ $(function(){
             $('.submit').attr('disabled', false);
           }
         }).done(function(data, textStatus, jqXHR) {
-            //通信成功時の処理
-            $('form')[0].reset();//フォームに入力している値をリセット
-            $('#result').text(data);//send_mail.phpから返ってきたメッセージをHTMLに入れて表示する
+          //通信成功時の処理
+          $('form')[0].reset();//フォームに入力している値をリセット
+          $('#result').text(data);//send_mail.phpから返ってきたメッセージをHTMLに入れて表示する
+          $('.status-wrap').css({
+              display: "block"
+            });
+            $('.status-wrap').animate({
+              top: "0px"
+            },duration);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             //通信失敗時の処理
-            $('#result').text('送信できませんでした');//失敗メッセージをHTMLに入れて表示する
+          $('#result').text('送信できませんでした');//失敗メッセージをHTMLに入れて表示する
         });
       });
     }
   });
+  }
+  function init() {
+    validation();
+    ajax();
+  }
+  init();
 });

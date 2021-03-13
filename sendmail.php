@@ -7,6 +7,11 @@ if(!isset($_POST['token'])) {
   exit;
 }
 
+      validRequired($name, 'name');
+      validRequired($subject, 'subject');
+      validRequired($message, 'message');
+      validemail($email, 'email');
+
 //キーとトークンが一致したら管理者に入力内容がメールで送られる
 if($_SESSION['key'] === $_POST['token']) {
   $name = $_POST['name'];
