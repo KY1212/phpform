@@ -1,12 +1,14 @@
 <?php
   // レスポンスデータを定義します。
   $res = array('is_success' => false);
-  // 各POSTデータを取り出します。
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $comment = $_POST['comment'];
+  $name = array_key_exists('name', $_POST) ? trim($_POST['name']) : '';
+  $email = array_key_exists('email', $_POST) ? trim($_POST['email']) : '';
+  $comment = array_key_exists('comment', $_POST) ? trim($_POST['comment']) : '';
+
   //メールの送り先
   $to = "lilium74u@gmail.com";
+  //メールの送り元
+  // $from = "lilium74u@gmail.com"
 
   // エラーメッセージを格納する配列を定義します。
   $errors = array();
@@ -19,7 +21,10 @@
   if ($comment === '') {
     $errors[] = array('classname' => 'comment', 'message'  => 'お問い合わせ内容を入力してください。');
   }
+
   if (count($errors) == 0) {
+    $res['is_success'] = true;
+
     //キーとトークンが一致したら管理者に入力内容がメールで送られる
     if($_SESSION['key'] === $_POST['token']) {
       // エラーが無い場合

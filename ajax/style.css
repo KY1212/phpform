@@ -62,9 +62,18 @@ li + li {
 }
 
 .result {
-	width: 100%;
 	justify-content: center;
 	display: none;
 	position: relative;
 	top: -90px;
+	padding: 20px;
+}
+
+.status {
+	text-align: center;
+	font-size: 25px;
+}
+
+.display {
+	display: block;
 }
