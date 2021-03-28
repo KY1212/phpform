@@ -14,36 +14,51 @@ $_SESSION['key'] = $token;
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="reset.css" />
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="base.js"></script>
+  <meta charset="UTF-8">
+  <title>お問い合わせフォーvrム【ajax】</title>
+  <!-- jQueryの読み込み -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/index.js"></script>
 </head>
 <body>
-  <div class="contact">
-    <div class="result">
-      <p class="status">お問い合わせを受け付けました</p>
-    </div>
+
+  <div id="contact">
+
     <div class="inner">
-      <h2 class="contact-title">問い合わせフォーム</h2>
-      <form class="contact-form" action="" method="post">
-        <ul class="field-wrap">
-          <li class="form-field">
-            <input class="name" name="name" type="text" placeholder="お名前" />
+      <h2 class="contact-title">問い合わf4fせフォーム</h2>
+
+      <form class="contact-form">
+        <ul class="contact-form-list">
+          <li class="contact-form-item">
+            <input type="text" name="name" placeholder="お名前" required>
           </li>
-          <li class="form-field">
-            <input class="email" name="email" type="email" placeholder="メールアドレス" />
+          <li class="contact-form-item">
+            <input type="email" name="email" placeholder="メールアドレス" required>
           </li>
-          <li class="form-field">
-            <textarea class="comment" name="comment" rows="15" cols="40" placeholder="お問い合わせ"></textarea>
+          <li class="contact-form-item">
+            <textarea name="comment" placeholder="内容" required></textarea>
+          </li>
+          <li class="contact-form-item">
+            <!-- 作成したトークンを次のページに引き継ぐ-->
+            <input type="hidden" name="token" value="<?= $token ?>">
+          </li>
+          <li class="contact-form-item">
+            <button class='submit' type="submit">送信</button>
           </li>
         </ul>
-        <div class="button-wrap">
-          <button class='submit' type="submit">送信</button>
-        </div>
       </form>
-    </div>
-  </div>
+
+      <!-- 送信中に表示するモーダルウィンドウ -->
+      <div id="modal">
+        <p>送信中です・・・</p>
+      </div><!-- /#modal -->
+
+      <!-- 結果メッセージ -->
+      <div id="result"></div><!-- /#result -->
+
+    </div><!-- /.inner -->
+  </div><!-- /#contact -->
+
+
 </body>
 </html>
