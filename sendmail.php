@@ -7,11 +7,6 @@ if(!isset($_POST['token'])) {
   exit;
 }
 
-      validRequired($name, 'name');
-      validRequired($subject, 'subject');
-      validRequired($message, 'message');
-      validemail($email, 'email');
-
 //キーとトークンが一致したら管理者に入力内容がメールで送られる
 if($_SESSION['key'] === $_POST['token']) {
   $name = $_POST['name'];
@@ -19,14 +14,11 @@ if($_SESSION['key'] === $_POST['token']) {
   $comment = $_POST['comment'];
 
   //メールの送り先
-  $to = 'lilium74u@gmail.com';
-
+  $to = $_POST['email'];
   //メールの件名
   $subject = $name . 'さんからの入力フォームでの送信です';
-
   //メール本文
   $comment = '名前:' . $name . "\r\n\r\n" . 'メールアドレス:' . $email . "\r\n\r\n" . '内容:' . $comment;
-
   //メールヘッダー
   $header = 'From: ' . mb_encode_mimeheader($name). ' <' . $email. '>';
 
@@ -35,7 +27,7 @@ if($_SESSION['key'] === $_POST['token']) {
   mb_internal_encoding('UTF-8');
 
   if(mb_send_mail($to, $subject, $comment, $header)) {
-    echo '送信に成功しました';
+    echo '送信しました';
   } else {
     echo  '送信に失敗しました';
   }
