@@ -16,6 +16,7 @@ $_SESSION['key'] = $token;
 <head>
   <meta charset="UTF-8">
   <title>お問い合わせ【ajax通信】</title>
+  <link rel="stylesheet" href="assets/css/reset.css" />
   <!-- jQueryの読み込み -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="./assets/js/index.js"></script>
@@ -48,8 +49,8 @@ $_SESSION['key'] = $token;
         </ul>
       </form>
       <!-- 結果メッセージ -->
-      <div id="result"></div><!-- /#result -->
-    </div><!-- /.inner -->
-  </div><!-- /#contact -->
+      <div id="result"></div>
+    </div>
+  </div>
 </body>
 </html>
