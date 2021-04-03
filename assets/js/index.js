@@ -5,12 +5,12 @@ $(function(){
       e.preventDefault();
       //フォームの入力値を変数に格納する
       let form_data = $('form').serialize();
-
-      $('button:submit[id="submit"]').click(function(){
-        if (!valid()) {
-          //バリデーションに引っ掛かった場合
-          return false;
-        } else {
+      if (!valid()) {
+        //バリデーションに引っ掛かった場合
+        return false;
+      } else {
+        myRet = confirm("送信しますか");
+        if ( myRet == true ){
           //フォームの入力内容をajaxにより送信する
           $.ajax ({
             url: '../sendmail.php',//送信先のURL
@@ -27,14 +27,16 @@ $(function(){
             }
           }).done(function (data, textStatus, jqXHR) {
             //通信成功時の処理
-            alert("success");
+            alert("送信しました");
             $('form')[0].reset();//フォームに入力している値をリセット
           }).fail(function (jqXHR, textStatus, errorThrown) {
             //通信失敗時の処理
-            alert("fail");
+            alert("送信に失敗しました");
           });
+        }else{
+          alert("キャンセルしました");
         }
-      });
+      }
     });
   }
 
